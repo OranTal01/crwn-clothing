@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
 
+import Home from './pages/home/Home.page';
+
 function App() {
   return (
     <div>
-      welcome oran
+      <Home />
     </div>
   );
 }
