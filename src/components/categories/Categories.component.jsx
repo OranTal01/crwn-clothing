@@ -1,17 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Categories.style.scss';
 
-import { useState } from 'react';
-import { categoriesData } from './categoriesData';
+import { CATEGORIES_DATA } from './categories.data';
 import Category from '../category/Category.component';
 
 const Categories = () => {
-    const [categories, setCategories] = useState(categoriesData);
+    const [categories, setCategories] = useState(CATEGORIES_DATA);
 
     return (
         <div className='categories-menu'>
-            { categories.map(({ title, imageUrl, id, size }) => (
-                <Category key={ id } title={ title } imageUrl={ imageUrl } size={ size } />
+            { categories.map(({ id, ...restCategoryData }) => (
+                <Category key={ id } { ...restCategoryData } />
             )) }
         </div>
     );

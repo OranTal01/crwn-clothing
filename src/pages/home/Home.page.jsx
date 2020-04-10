@@ -3,11 +3,11 @@ import './Home.style.scss';
 
 import Categories from '../../components/categories/Categories.component';
 
-const Home = () => (
+const HomePage = () => (
     <div className="homepage">
         <h1>Home Page</h1>
         <Categories />
     </div>
 );
 
-export default Home;
+export default HomePage;

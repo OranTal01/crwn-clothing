@@ -1,4 +1,4 @@
-export const categoriesData = [
+export const CATEGORIES_DATA = [
     {
         title: 'hats',
         imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
