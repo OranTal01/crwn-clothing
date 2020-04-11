@@ -55,6 +55,7 @@ const SignUp = () => {
                     type='password'
                     name='password'
                     value={ password }
+                    autoComplete="on"
                     required
                 />
                 <FormInput
@@ -63,6 +64,7 @@ const SignUp = () => {
                     type='password'
                     name='password2'
                     value={ password2 }
+                    autoComplete="on"
                     required
                 />
                 <CustomButton type='submit'>
