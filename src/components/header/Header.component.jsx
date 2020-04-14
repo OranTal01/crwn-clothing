@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { auth } from '../../firebase/firebase.utils';
 
 const Header = ({ user }) => {
-
     return (
         <div className="header">
             <Link to="/">

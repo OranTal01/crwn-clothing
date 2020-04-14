@@ -7,17 +7,26 @@ import HomePage from './pages/home/Home.page';
 import ShopPage from './pages/shop/Shop.page';
 import Header from './components/header/Header.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/Sign-in-and-sign-up.page';
-import { auth } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { useEffect } from 'react';
 
-let unsubscribeFromAuth = null;
 
 const App = () => {
 
   const [user, setUser] = useState('');
 
   useEffect(() => {
-    unsubscribeFromAuth = auth.onAuthStateChanged(userAuth => {
+    auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapShot => {
+          setUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          });
+        });
+      }
       setUser(userAuth);
     });
   }, []);

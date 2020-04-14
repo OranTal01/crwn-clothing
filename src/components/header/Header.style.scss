@@ -11,7 +11,9 @@
     padding: 25px;
 
     span {
-      padding: 5px;
+      display: flex;
+      flex-direction: row;
+      width: 100px;
     }
   }
 
