@@ -9,11 +9,10 @@ import Header from './components/header/Header.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/Sign-in-and-sign-up.page';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { useEffect } from 'react';
+import { setCurrentUser } from './redux/user/user-actions';
+import { connect } from 'react-redux';
 
-
-const App = () => {
-
-  const [user, setUser] = useState('');
+const App = ({ setCurrentUser }) => {
 
   useEffect(() => {
     auth.onAuthStateChanged(async userAuth => {
@@ -21,19 +20,19 @@ const App = () => {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapShot => {
-          setUser({
+          setCurrentUser({
             id: snapShot.id,
             ...snapShot.data()
           });
         });
       }
-      setUser(userAuth);
+      setCurrentUser(userAuth);
     });
-  }, []);
+  }, [setCurrentUser]);
 
   return (
     <div>
-      <Header user={ user } />
+      <Header />
       <Switch>
         <Route exact path="/" component={ HomePage } />
         <Route path="/shop" component={ ShopPage } />
@@ -43,4 +42,8 @@ const App = () => {
   );
 };
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+
+export default connect(null, mapDispatchToProps)(App);
