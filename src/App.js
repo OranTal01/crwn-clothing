@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Switch, Route } from "react-router-dom";
+import React from 'react';
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import './App.css';
 
@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import { setCurrentUser } from './redux/user/user-actions';
 import { connect } from 'react-redux';
 
-const App = ({ setCurrentUser }) => {
+const App = ({ setCurrentUser, currentUser }) => {
 
   useEffect(() => {
     auth.onAuthStateChanged(async userAuth => {
@@ -36,14 +36,19 @@ const App = ({ setCurrentUser }) => {
       <Switch>
         <Route exact path="/" component={ HomePage } />
         <Route path="/shop" component={ ShopPage } />
-        <Route path="/sign-in" component={ SignInAndSignUp } />
+        <Route path="/sign-in" render={ () => currentUser ?
+          (<Redirect to='/' />) : (<SignInAndSignUp />) } />
       </Switch>
     </div>
   );
 };
 
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+});
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
