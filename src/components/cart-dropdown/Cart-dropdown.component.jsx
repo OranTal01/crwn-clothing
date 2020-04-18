@@ -4,13 +4,14 @@ import { withRouter } from 'react-router-dom';
 
 import CustomButton from '../custom-button/Custom-button.component';
 import CartItem from '../cart-item/Cart-item.component';
-import { selectCartItems } from '../../redux/cart/cart-selectors';
+import { selectCartItems, selectCartHidden } from '../../redux/cart/cart-selectors';
+import { toggleCartDropdown } from '../../redux/cart/cart-actions';
 
 import './Cart-dropdown.style.scss';
 
-const CartDropdown = ({ cartItems, history }) => {
+const CartDropdown = ({ cartItems, history, toggleCartDropdown }) => {
     return (
-        <div className="cart-dropdown">
+        <div className="cart-dropdown" onMouseLeave={ () => toggleCartDropdown() }>
 
             <div className="cart-items">
                 {
@@ -28,7 +29,12 @@ const CartDropdown = ({ cartItems, history }) => {
 };
 
 const mapStateToProps = state => ({
-    cartItems: selectCartItems(state)
+    cartItems: selectCartItems(state),
+    hidden: selectCartHidden(state)
 });
 
-export default withRouter(connect(mapStateToProps)(CartDropdown));
+const mapDispatchToProps = dispatch => ({
+    toggleCartDropdown: () => dispatch(toggleCartDropdown())
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CartDropdown));

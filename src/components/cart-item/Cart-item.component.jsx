@@ -16,7 +16,7 @@ const CartItem = ({ cartItem, removeItem }) => {
                 </span>
 
             </div>
-            <button onClick={ () => removeItem(cartItem) }><span>remove item</span></button>
+            <button className="remove-item" onClick={ () => removeItem(cartItem) }><span>remove</span></button>
         </div>
     );
 };
