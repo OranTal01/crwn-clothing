@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Shop.style.scss';
 
-import { SHOP_DATA } from './shop.data';
+import SHOP_DATA from './shop.data';
 import CollectionPreview from '../../components/collection-preview/Collection-preview.component';
 
 const ShopPage = () => {
