@@ -6,11 +6,13 @@ import { useEffect } from 'react';
 
 import HomePage from './pages/home/Home.page';
 import ShopPage from './pages/shop/Shop.page';
+import CheckoutPage from './pages/checkout/Checkout.page';
 import Header from './components/header/Header.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/Sign-in-and-sign-up.page';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user-actions';
 import { selectCurrentUser } from './redux/user/user-selectors';
+
 
 import './App.css';
 
@@ -40,6 +42,7 @@ const App = ({ setCurrentUser, currentUser }) => {
         <Route path="/shop" component={ ShopPage } />
         <Route path="/sign-in" render={ () => currentUser ?
           (<Redirect to='/' />) : (<SignInAndSignUp />) } />
+        <Route path="/checkout" component={ CheckoutPage } />
       </Switch>
     </div>
   );
