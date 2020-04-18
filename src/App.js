@@ -1,16 +1,18 @@
 import React from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
+import { connect } from 'react-redux';
+import { useEffect } from 'react';
 
-import './App.css';
 
 import HomePage from './pages/home/Home.page';
 import ShopPage from './pages/shop/Shop.page';
 import Header from './components/header/Header.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/Sign-in-and-sign-up.page';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
-import { useEffect } from 'react';
 import { setCurrentUser } from './redux/user/user-actions';
-import { connect } from 'react-redux';
+import { selectCurrentUser } from './redux/user/user-selectors';
+
+import './App.css';
 
 const App = ({ setCurrentUser, currentUser }) => {
 
@@ -43,8 +45,8 @@ const App = ({ setCurrentUser, currentUser }) => {
   );
 };
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = (state) => ({
+  currentUser: selectCurrentUser(state)
 });
 
 const mapDispatchToProps = dispatch => ({
