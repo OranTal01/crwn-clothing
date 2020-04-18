@@ -22,11 +22,11 @@ const CheckoutItem = ({ cartItem, subtractAndRemoveItem, addItem, removeItem }) 
                 <div className="right-arrow" onClick={ () => addItem(cartItem) }>&#10095;</div>
             </span>
             <span className="price">
-                { price }
+                { `$${price}` }
             </span>
-            <button className="remove-button" onClick={ () => removeItem(cartItem) }>
-                X
-            </button>
+            <div className="remove-button" onClick={ () => removeItem(cartItem) }>
+                &#10005;
+            </div>
         </div>
     );
 };

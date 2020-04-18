@@ -12,7 +12,8 @@ const CartItem = ({ cartItem, subtractAndRemoveItem }) => {
             <div className="item-details">
                 <span>{ name }</span>
                 <span>
-                    { quantity } X { price }
+                    { quantity } X { `$${price}` }
+
                 </span>
 
             </div>
