@@ -22,7 +22,10 @@ const CartDropdown = ({ cartItems, history, toggleCartDropdown }) => {
                         <span className="empty-message">Your cart is empty</span>
                 }
             </div>
-            <CustomButton disabled={ cartItems.length === 0 } onClick={ () => history.push('/checkout') }>GO TO CHECKOUT</CustomButton>
+            <CustomButton disabled={ cartItems.length === 0 } onClick={ () => {
+                history.push('/checkout');
+                toggleCartDropdown();
+            } }>GO TO CHECKOUT</CustomButton>
 
         </div>
     );
