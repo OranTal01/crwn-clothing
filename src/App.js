@@ -14,11 +14,11 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import { setCurrentUser } from './redux/user/user-actions';
 import { selectCurrentUser } from './redux/user/user-selectors';
-
+import { selectCartItems } from './redux/cart/cart-selectors';
 
 import './App.css';
 
-const App = ({ setCurrentUser, currentUser }) => {
+const App = ({ setCurrentUser, currentUser, cartItems }) => {
 
   useEffect(() => {
     auth.onAuthStateChanged(async userAuth => {
@@ -44,14 +44,16 @@ const App = ({ setCurrentUser, currentUser }) => {
         <Route path="/shop" component={ ShopPage } />
         <Route exact path="/sign-in" render={ () => currentUser ?
           (<Redirect to='/' />) : (<SignInAndSignUp />) } />
-        <Route exact path="/checkout" component={ CheckoutPage } />
+        <Route exact path="/checkout" render={ () => cartItems.length ?
+          (<CheckoutPage />) : (<Redirect to='/shop' />) } />
       </Switch>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  currentUser: selectCurrentUser(state)
+  currentUser: selectCurrentUser(state),
+  cartItems: selectCartItems(state)
 });
 
 const mapDispatchToProps = dispatch => ({

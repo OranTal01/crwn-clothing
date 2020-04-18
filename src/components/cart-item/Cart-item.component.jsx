@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import './Cart-item.style.scss';
-import { removeItem } from '../../redux/cart/cart-actions';
+import { subtractAndRemoveItem } from '../../redux/cart/cart-actions';
 
-const CartItem = ({ cartItem, removeItem }) => {
+const CartItem = ({ cartItem, subtractAndRemoveItem }) => {
     const { imageUrl, price, name, quantity } = cartItem;
     return (
         <div className="cart-item">
@@ -16,13 +16,13 @@ const CartItem = ({ cartItem, removeItem }) => {
                 </span>
 
             </div>
-            <button className="remove-item" onClick={ () => removeItem(cartItem) }><span>remove</span></button>
+            <button className="remove-item" onClick={ () => subtractAndRemoveItem(cartItem) }><span>remove</span></button>
         </div>
     );
 };
 
 const mapDispatchToProps = dispatch => ({
-    removeItem: (item) => dispatch(removeItem(item))
+    subtractAndRemoveItem: (item) => dispatch(subtractAndRemoveItem(item))
 });
 
 export default connect(null, mapDispatchToProps)(CartItem);

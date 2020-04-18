@@ -1,5 +1,5 @@
 import { CART_ACTION_TYPES } from './cart-constants';
-import { addItems, removeItems } from './cat-utils';
+import { addItems, subtractAndRemoveItems, removeItem } from './cat-utils';
 
 
 const INITIAL_STATE = {
@@ -19,12 +19,16 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 cartItems: addItems(state.cartItems, action.payload)
             };
+        case CART_ACTION_TYPES.SUBTRACT_AND_REMOVE_ITEM:
+            return {
+                ...state,
+                cartItems: subtractAndRemoveItems(state.cartItems, action.payload)
+            };
         case CART_ACTION_TYPES.REMOVE_ITEM:
             return {
                 ...state,
-                cartItems: removeItems(state.cartItems, action.payload)
+                cartItems: removeItem(state.cartItems, action.payload)
             };
-
         default:
             return state;
     }
