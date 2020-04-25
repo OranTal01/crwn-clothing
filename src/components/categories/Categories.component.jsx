@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import './Categories.style.scss';
+import React from 'react';
+import { connect } from 'react-redux';
 
-import { CATEGORIES_DATA } from './categories.data';
+import { selectCategories } from '../../redux/categories/categories-selectors';
 import Category from '../category/Category.component';
 
-const Categories = () => {
-    const [categories, setCategories] = useState(CATEGORIES_DATA);
+import './Categories.style.scss';
+
+
+const Categories = ({ categories }) => {
 
     return (
         <div className='categories-menu'>
@@ -16,4 +18,8 @@ const Categories = () => {
     );
 };
 
-export default Categories;
+const mapStateToProps = state => ({
+    categories: selectCategories(state)
+});
+
+export default connect(mapStateToProps)(Categories);
