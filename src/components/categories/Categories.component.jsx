@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { selectCategories } from '../../redux/categories/categories-selectors';
+import { selectCategoriesData } from '../../redux/categories/categories-selectors';
 import Category from '../category/Category.component';
 
 import './Categories.style.scss';
@@ -19,7 +19,7 @@ const Categories = ({ categories }) => {
 };
 
 const mapStateToProps = state => ({
-    categories: selectCategories(state)
+    categories: selectCategoriesData(state)
 });
 
 export default connect(mapStateToProps)(Categories);
